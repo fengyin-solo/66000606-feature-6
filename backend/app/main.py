@@ -64,6 +64,15 @@ GAS_PATTERNS = [
     {"function": "short_circuit", "issue": "逻辑运算可短路优化", "saving": 0.15},
 ]
 
+# Navigation entries exposed to the frontend sidebar.
+# New entries appended here show up in the sidebar automatically.
+NAV_ITEMS = [
+    {"path": "/", "title": "合约审计"},
+    {"path": "/patterns", "title": "漏洞模式库"},
+    {"path": "/history", "title": "审计历史"},
+    {"path": "/gas", "title": "Gas分析"},
+]
+
 class AuditRequest(BaseModel):
     code: str
     filename: str
@@ -118,6 +127,10 @@ def compute_security_score(vulnerabilities: List[dict]) -> int:
 @app.get("/")
 async def root():
     return {"message": "Smart Contract Security Auditor", "version": "1.0.0"}
+
+@app.get("/api/nav")
+async def get_nav():
+    return {"code": 0, "message": "success", "data": NAV_ITEMS}
 
 @app.get("/api/patterns")
 async def list_patterns():

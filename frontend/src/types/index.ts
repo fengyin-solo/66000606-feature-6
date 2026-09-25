@@ -3,3 +3,8 @@ export interface ApiResponse<T = any> {
   message: string
   data: T
 }
+
+export interface NavItem {
+  path: string
+  title: string
+}
